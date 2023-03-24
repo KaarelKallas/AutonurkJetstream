@@ -51,6 +51,7 @@ class CarController extends Controller
             'power' => $request->power,
             'fuel' => $request->fuel,
             'drive' => $request->drive,
+            'gearbox' => $request->gearbox,
             'year' => $request->year,
             'mileage' => $request->mileage,
             'color' => $request->color,

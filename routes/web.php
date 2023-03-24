@@ -25,6 +25,7 @@ Route::get('/', function () {
     ]);
 })->name('home');
 Route::prefix('cars')->group(function () {
+   // Route::get('/kasutatud', [CarController::class, 'index'])->name('used');
     Route::resource('cars', CarController::class);
     Route::post('/store', [CarController::class, 'store'])->middleware(['auth'])->name('store');
     Route::delete('/destroy/{id}', [CarController::class, 'destroy'])->middleware(['auth'])->name('destroy');

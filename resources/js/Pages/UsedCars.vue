@@ -1,6 +1,6 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
-
+import CarCard from '../Components/CarCard.vue'
 const props = defineProps({
     cars: {
         type: Object,
@@ -38,13 +38,6 @@ export default {
 </script>
 <template>
 
-    <div class="text-white" v-for="car in cars">
-        <span>{{ car.make }}</span>
-        <span>{{ car.model }}</span>
-        <div v-for="image in images" class="flex w-[10vw]">
-            <img :src="getImages(car.id, image)">
-        </div>
-        <button @click="destroy(car.id)">DELETE</button>
-    </div>
+    <CarCard :cars="cars"></CarCard>
 
 </template>

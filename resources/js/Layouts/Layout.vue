@@ -64,7 +64,7 @@ const showingNavigationDropdown = ref(false)
 
                     </div>
                 </div>
-                <div class="border-[#ED9B40] border w-[136px] h-[34px] rounded-full flex items-center justify-center absolute right-[23vw] bottom-[-17px] bg-[#505A5B]">
+                <div class="border-[#ED9B40] border w-[136px] h-[34px] rounded-full flex items-center justify-center absolute right-[23vw] top-28 bg-[#505A5B]">
                     <NavLink class="text-[#ED9B40]" :href="route('dashboard')" :active="route().current('dashboard')">
                         RateMyCar
                     </NavLink>
