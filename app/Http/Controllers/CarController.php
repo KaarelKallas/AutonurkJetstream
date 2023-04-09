@@ -19,16 +19,14 @@ class CarController extends Controller
         return Inertia::render(
             'UsedCars',
             [
+
                 'allCars' => $cars,
+
                 'cars' => Car::query()
                 ->when(Request::input(['selectMake']), function ($query, $search) {
-                    $query->where('make', 'like', '%' . $search . '%')->where('model', Request::input(['selectModel']))
-                        ->OrWhere('body', 'like', '%' . $search . '%')
-                        ->OrWhere('year', 'like', '%' . $search . '%')
-                        ->OrWhere('fuel', 'like', '%' . $search . '%')
-                        ->OrWhere('gearbox', 'like', '%' . $search . '%')
-                        ->OrWhere('drive', 'like', '%' . $search . '%');
-                })->get()
+
+                    $query->where('make', Request::input(['selectMake']))->where('model', Request::input(['selectModel']));
+                })->get(),
 
             ]
         );

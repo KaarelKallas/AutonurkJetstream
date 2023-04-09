@@ -34,12 +34,16 @@ function destroy(id) {
     }
 }
 const filterForm = reactive({
-  selectMake: null,
+  selectMake: [],
   selectModel: null,
 })
-
+let allModels = []
+props.allCars.forEach(element => {
+    allModels.push(element.model)
+});
+allModels = allModels.toString().replaceAll(',', ' OR ')
 console.log(props.images)
-console.log(props.cars)
+console.log(allModels)
 let filterCars = ref('');
 
 // watch(filterCars, (value) => {
@@ -69,12 +73,12 @@ export default {
 </script>
 <template>
     <form @submit.prevent="submit">
-    <select v-model="filterForm.selectMake">
+    <select v-model="filterForm.selectMake" multiple>
         <option  v-for="car in allCars" :key="car.make" :value="car.make">{{car.make}}</option>
     </select>
-    <select v-model="filterForm.selectModel">
+    <select v-model="filterForm.selectModel" multiple>
         <option  v-for="car in allCars" :key="car.model" :value="car.model">{{car.model}}</option>
-        <option value="">All</option>
+        <option :value="allModels">All</option>
     </select>
     <button type="submit">Submit</button>
 </form>

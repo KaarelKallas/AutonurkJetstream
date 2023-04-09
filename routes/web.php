@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,6 +25,19 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
+Route::get('/cardata', function () {
+    $response = Http::withHeaders([
+        'X-RapidAPI-Key' => 'f9b674355dmsh576c6041533f54cp1fa8cejsnf88e3580deb3',
+        'X-RapidAPI-Host' => 'car-api2.p.rapidapi.com'
+    ])->post('https://car-api2.p.rapidapi.com/api', [
+        'sort' => 'id',
+        'direction' => 'asc',
+        'year' => '2020',
+        'verbose' => 'yes'
+    ]);
+    $response = Http::acceptJson()->get('https://car-api2.p.rapidapi.com/api/models');
+
+});
 Route::prefix('cars')->group(function () {
    // Route::get('/kasutatud', [CarController::class, 'index'])->name('used');
     Route::resource('cars', CarController::class);
