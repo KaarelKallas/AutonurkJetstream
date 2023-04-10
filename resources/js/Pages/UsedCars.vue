@@ -27,6 +27,7 @@ function getImages(id, image) {
     console.log(imagesById)
     return imagesById
 }
+
 const formDelete = useForm({})
 function destroy(id) {
     if (confirm('Are you sure you want to Delete')) {
@@ -41,7 +42,7 @@ let allModels = []
 props.allCars.forEach(element => {
     allModels.push(element.model)
 });
-allModels = allModels.toString().replaceAll(',', ' OR ')
+allModels = allModels.toString()
 console.log(props.images)
 console.log(allModels)
 let filterCars = ref('');
@@ -88,6 +89,6 @@ export default {
                                     placeholder="Search..."
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-60 p-2.5 "
                                 />
-    <CarCard :cars="cars"></CarCard>
+    <CarCard v-for="car in cars" :key="car.id" :images="images" :car="car"></CarCard>
 
 </template>

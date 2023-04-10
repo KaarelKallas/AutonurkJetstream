@@ -19,6 +19,7 @@ const form = useForm({
     VIN: null,
     price: null,
     used: null,
+    images: null,
 
 })
 </script>
@@ -63,9 +64,14 @@ const form = useForm({
                     <label for="used">Used:</label>
                     <input id="used" v-model="form.used" />
 
+                    <label for="images">Images:</label>
                     <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                         {{ form.progress.percentage }}%
                     </progress>
+
+                    <div class="flex items-center text-center">
+                        <input type="file" name="images[]" multiple @input="form.images = $event.target.files" />
+                    </div>
 
                     <button type="submit">Submit</button>
                 </form>

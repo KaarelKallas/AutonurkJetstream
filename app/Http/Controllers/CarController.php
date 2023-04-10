@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request;
+use App\Models\Image;
 use Inertia\Inertia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class CarController extends Controller
 {
@@ -15,11 +17,11 @@ class CarController extends Controller
     public function index()
     {
         $cars = Car::all();
-
+        $images = Media::all();
         return Inertia::render(
             'UsedCars',
             [
-
+                'images' => $images,
                 'allCars' => $cars,
 
                 'cars' => Car::query()
@@ -70,11 +72,11 @@ class CarController extends Controller
         ]);
 
 
-        // if ($images = $request->file('images')) {
-        //     foreach ($images as $image) {
-        //         $car->addMedia($image)->toMediaCollection('images');
-        //     }
-        // }
+         if ($images = Request::file('images')) {
+             foreach ($images as $image) {
+                 $car->addMedia($image)->toMediaCollection('images');
+             }
+         }
     }
 
     /**
